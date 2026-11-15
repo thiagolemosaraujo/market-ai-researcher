@@ -1,0 +1,30 @@
+# O que NÃO entra no contexto de build do Docker (infra/docker/*.Dockerfile usam `context: .`).
+#
+# Os Dockerfiles começam com `COPY . .` antes do `turbo prune`. Sem este arquivo, esse COPY
+# leva o repositório inteiro pra dentro da imagem intermediária — inclusive o `.env` local.
+
+# Segredos locais. O `.env.example` fica, porque não tem valor real nenhum.
+.env
+.env.*
+!.env.example
+
+# Dependências. São reinstaladas dentro da imagem, pra arquitetura dela (Alpine/musl).
+**/node_modules
+.pnpm-store
+
+# Saídas de build e caches. São regeradas dentro da imagem.
+**/dist
+**/.turbo
+**/.angular
+**/.cache
+**/coverage
+out
+
+# Histórico e ferramentas do editor/agente, irrelevantes pro build.
+.git
+.claude
+.agents
+.vscode
+.idea
+.firebase
+*.log
