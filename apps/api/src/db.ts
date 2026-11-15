@@ -1,8 +1,13 @@
 import { Pool } from 'pg';
 
+// Dois timeouts, porque são duas formas diferentes de o banco "não responder":
+// - connectionTimeoutMillis: o banco nem aceita a conexão (fora do ar, host errado).
+// - query_timeout: a conexão abre, mas a consulta trava (banco sobrecarregado, lock).
+// Sem o segundo, o SELECT 1 do /health esperaria para sempre e a rota nunca responderia.
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   connectionTimeoutMillis: 2000,
+  query_timeout: 2000,
 });
 
 // Erro em cliente ocioso do pool (ex.: banco derrubou a conexão) emite 'error' no Pool.
