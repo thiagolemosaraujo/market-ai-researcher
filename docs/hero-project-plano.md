@@ -115,6 +115,8 @@ Um chunk por parágrafo, sem fragmentação — cada parágrafo é autocontido. 
 
 `ticker` · `company_name` · `setor` · `period` · `period_end` · `source_url` · `fetched_at`
 
+No JSON normalizado (`data/documentos/{TICKER}.json`) esses campos seguem o camelCase do TypeScript: `companyName`, `periodEnd`, `sourceUrl` e `fetchedAt` (`ticker`, `setor` e `period` não mudam). O snake_case fica para os arquivos de entrada: `empresas.csv` e os CSVs da CVM.
+
 Sustentam três funções: filtro na recuperação, citação com data-base na resposta, e política de expiração dos documentos inseridos pela busca web.
 
 ### 4.4 Efeito sobre o comportamento do agente

@@ -147,6 +147,8 @@ Cada empresa e trimestre vira **um parágrafo autocontido**, gerado por template
 
 Metadados obrigatórios em todo documento: `ticker`, `company_name`, `setor`, `period`, `period_end`, `source_url`, `fetched_at`.
 
+**Convenção de nomes:** snake_case é dos arquivos de entrada — `data/empresas.csv` (`razao_social`, `cd_cvm`) e os CSVs da CVM (`CD_CVM`, `DT_REFER`). O JSON normalizado em `data/documentos/{TICKER}.json` segue o camelCase do TypeScript, então os metadados acima aparecem lá como `companyName`, `periodEnd`, `sourceUrl` e `fetchedAt` (`ticker`, `setor` e `period` não mudam). Não renomeie o JSON para snake_case.
+
 O corpus contém apenas números. Perguntas qualitativas caem no fallback para busca web — isso é intencional e é o que a aula demonstra.
 
 ---
